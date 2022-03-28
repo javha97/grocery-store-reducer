@@ -10,6 +10,7 @@ import { Womencategory } from "./category/Womencategory";
 import { Itemdatamap } from "./Itemdatamap";
 import { Itemsonsnap } from "./Cart/Items.jsx";
 import { Favorites } from "./favorites/Favorites";
+import {Orderaccep} from './Orderaccept'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -25,6 +26,8 @@ ReactDOM.render(
         ></Route>
         <Route path="/explore/womencat" element={<Womencategory />}></Route>
         <Route path="/favorites/:slug" element={<Itemdatamap />}></Route>
+        <Route path="/cart/acceptorder" element={<Orderaccep/>}></Route>
+
         <Route path="/cart" element={<Itemsonsnap />}></Route>
         <Route path="/favorites" element={<Favorites />}></Route>
       </Routes>

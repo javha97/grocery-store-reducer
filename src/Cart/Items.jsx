@@ -3,9 +3,11 @@ import { db } from "../firebase";
 import { useState, useEffect } from "react";
 import { EachItem } from "./item";
 import { Nav } from "../Navigation";
+import { Checkout } from "../checkout";
 export const Itemsonsnap = () => {
   const [data, setdata] = useState([]);
   const [itemprice, setitemprice] = useState([]);
+  const [bool, setbool] = useState(true);
   const ip = useRef();
   useEffect(() => {
     db.collection("hi").onSnapshot((onSnapshot) => {
@@ -31,11 +33,15 @@ export const Itemsonsnap = () => {
       });
     });
   }, []);
+  // console.log(itemprice);
   if (itemprice[0]) {
     ip.current = itemprice.reduce((acc, val) => {
       return acc + val;
     });
   }
+  const Click = () => {
+    setbool(!bool);
+  };
   return (
     <div className="App flex">
       <div className="cartcontainer">
@@ -49,16 +55,18 @@ export const Itemsonsnap = () => {
             })}
           </div>
           <div className="flex center absolute">
-            <button className="addbasket flex">
+            <button className="addbasket flex" onClick={Click}>
               Go to checkout
               <div className="checkoutbtn">
-               {ip.current ? '$'+(ip.current).toFixed(2) : ip.current}
+                {ip.current ? "$" + ip.current.toFixed(2) : ip.current}
               </div>
             </button>
           </div>
         </div>
         <Nav />
+         {!bool && <Checkout bool={bool} price={ip.current.toFixed(2)} setbool={setbool}/>}
       </div>
+     
     </div>
   );
 };

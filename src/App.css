@@ -127,7 +127,7 @@ body {
   box-sizing: border-box;
   border-radius: 17px;
 }
-.submaincontainer{
+.submaincontainer {
   width: 414px;
   height: 896px;
   border: 1px solid black;
@@ -284,6 +284,132 @@ body {
   width: 14px;
   margin-bottom: 29px;
   margin-left: 30px;
+  background-size: cover;
+}
+.checkfont {
+  font-family: "ABeeZee";
+  font-style: italic;
+  font-weight: 400;
+  font-size: 18px;
+  color: #7c7c7c;
+}
+.checkoutcenter {
+  width: 90% !important;
+  margin: 0 auto;
+}
+.btm1 {
+  height: 40px;
+  border-bottom: 1px solid #e2e2e2b2;
+  margin-top: 20px;
+}
+.acceptimg {
+  background: url("./img/orderaccept.png");
+  width: 269.08px;
+  height: 240.31px;
+  margin: 0 auto;
+  position: absolute;
+  top: 152px;
+  left: 57px;
+}
+.btncenter {
+  display: flex;
+  margin-top: 150px;
+  justify-content: center;
+}
+.backhomebtn {
+  border: none;
+  background: none;
+  font-family: "ABeeZee";
+  font-style: italic;
+  font-weight: 400;
+  font-size: 18px;
+  margin-top: 10px;
+  width: 100%;
+}
+.accbtn {
+}
+#acc {
+  width: 300px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 30px;
+  font-family: "ABeeZee";
+  font-style: italic;
+  font-weight: 400;
+  font-size: 16px;
+}
+.checkfont2 {
+  font-family: "ABeeZee";
+  font-style: italic;
+  font-weight: 400;
+  font-size: 16px;
+}
+.orderaccepted {
+  justify-content: center;
+  display: flex;
+  font-family: "ABeeZee";
+  font-style: italic;
+  font-weight: 400;
+  font-size: 28px;
+  width: 300px;
+  margin: 0 auto;
+  text-align: center;
+}
+.acceptord {
+  width: 100%;
+  top: 0;
+  height: 100%;
+  position: absolute;
+
+  background: rgba(252, 252, 252, 0.6);
+  backdrop-filter: blur(90px);
+}
+.subcheckout {
+  z-index: 5;
+  position: absolute;
+  bottom: 0;
+  height: 54vh;
+  background: #f2f3f2;
+  border-radius: 30px 30px 0px 0px;
+}
+.containercheckout {
+  z-index: 3;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
+  /* background: #f2f3f2; */
+  border-radius: 30px 30px 0px 0px;
+}
+.rightarr {
+  background: url("./img/rightarr.png");
+  width: 8.4px;
+  height: 14px;
+  margin-top: 2px;
+  margin-left: 18px;
+  background-size: cover;
+}
+.placeorderbtn {
+  background: #53b175;
+  width: 364px;
+  height: 67px;
+  border-radius: 19px;
+  color: white;
+  border: none;
+  font-family: "ABeeZee";
+  font-style: italic;
+  font-weight: 400;
+  font-size: 18px;
+  margin-top: 10px;
+}
+.blur {
+  position: absolute;
+  top: 0;
+  z-index: 3;
+  width: 100%;
+  height: 50vh;
+  background-color: black;
+  opacity: 43%;
 }
 p {
   /* width: 263px; */
@@ -295,6 +421,7 @@ p {
 .cartcontainer {
   width: 414px;
   height: 896px;
+  position: relative;
   border: 1px solid black;
 }
 .f {
@@ -313,14 +440,14 @@ p {
   border-radius: 18px;
 }
 .eachitem {
-  width: 173px;
+  min-width: 173px;
   height: 248px;
   border: 1px solid #e2e2e2;
   box-sizing: border-box;
   border-radius: 18px;
   justify-content: center;
   align-items: center;
-  /* margin-left: 8px; */
+  margin-left: 8px;
 }
 button {
   font-size: 12px;
@@ -333,7 +460,7 @@ a {
 .navcont {
   justify-content: space-around;
   font-size: 12px;
-  border-top: 1px solid;
+  /* border-top: 1px solid; */
   width: 414px;
   background: white;
   position: absolute;
@@ -366,9 +493,11 @@ a {
   background: url("./img/Vector\ \(3\).png");
   width: 16.04px;
   height: 20px;
+  background-size: contain;
 }
 .carticon {
   background: url("./img/Vector\ \(4\).png");
+  background-size: contain;
   width: 21.97px;
   height: 19.56px;
 }
@@ -376,11 +505,13 @@ a {
   background: url("./img/Group\ 3.png");
   width: 28.35px;
   height: 18.21px;
+  /* background-size: contain; */
 }
 .loveicon {
   background: url("./img/Vector.png");
   width: 22.8px;
   height: 19.6px;
+  /* background-size: contain; */
 }
 .subcontainer1 {
   width: 90%;
@@ -554,7 +685,8 @@ img {
   margin-top: 15px;
   margin-left: 20px;
 }
-.l{
-      width: 90%;
-    margin: 0 auto;
+.l {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 10px;
 }
