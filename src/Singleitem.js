@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { db } from "./firebase";
-const Singleitem = ({ id, title, image, category, description, price }) => {
+const Singleitem = ({ id, title, image,price }) => {
 
   return (
     <>

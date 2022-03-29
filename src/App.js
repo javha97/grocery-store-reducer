@@ -19,9 +19,16 @@ function App() {
           <div className="maincontainer">
             <div className="searchcont flex">
               <div className="searchicon"></div>
-                <input value={value} onChange={onchange} className='input' placeholder="Search Store"></input>
+              <input
+                value={value}
+                onChange={onchange}
+                className="input"
+                placeholder="Search Store"
+              ></input>
             </div>
-            <div style={{ height: "720px", marginTop: "20px",overflow: "scroll" }}>
+            <div
+              style={{ height: "720px", marginTop: "20px", overflow: "scroll" }}
+            >
               <div className="font l">Women's clothing</div>
               <div className="itemcontainer flex">
                 <Women />
@@ -45,18 +52,23 @@ function App() {
       ) : (
         <div className="App flex">
           <div className="imaincontainer">
-          <div className="searchcont flex">
+            <div className="searchcont flex">
               <div className="searchicon"></div>
-                <input value={value} onChange={onchange} className='input' placeholder="Search Store"></input>
+              <input
+                value={value}
+                onChange={onchange}
+                className="input"
+                placeholder="Search Store"
+              ></input>
             </div>
-           {data
+            {data
               .filter((el) => {
                 const a = el.title.toLowerCase();
                 if (a.includes(value)) {
                   return el;
                 }
               })
-              .map(({ id, title, image, category, description, price }, i) => {
+              .map(({ id, title, image, price }, i) => {
                 return (
                   <Singleitem
                     id={id}

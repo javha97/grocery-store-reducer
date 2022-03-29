@@ -1,25 +1,27 @@
 import React from "react";
-import { data } from "../utils/data";
-import { Eitem } from "./Eitem";
+import { Link } from "react-router-dom";
 import "../App.css";
-export const Favorite = ({ etitle, bool, rate, price }) => {
-  const a = data.filter(({ title }) => {
-    return title === etitle;
-  });
+export const Favorite = ({ image, id, title, rate, price }) => {
   return (
     <div className="cartcont">
-      {a.map(({ image, price, title, id, rating: { rate } }, i) => {
-        return (
-          <Eitem
-            id={id}
-            key={i}
-            image={image}
-            rate={rate}
-            price={price}
-            title={title}
-          />
-        );
-      })}
+      <div className="cartitem flex">
+        <img alt="#" src={image}></img>
+        <div className="gg">
+          <p>{title}</p>
+          <div>
+            Rate:
+            {rate}
+          </div>
+        </div>
+        <div className="flex align">
+          <div className="flex">
+            <div className="margin"> ${price}</div>
+            <Link to={id + "i"}>
+              <div className="rightarrow"></div>
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

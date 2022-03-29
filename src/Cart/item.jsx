@@ -1,42 +1,55 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../App.css";
-import { data } from "../utils/data";
-import { db } from "../firebase";
-export const EachItem = ({ price, count, title }) => {
-  const a = data.filter((el) => {
-    return el.title === title;
-  });
-  if (count === 0) {
-    db.collection("hi").doc(title).delete();
-  }
+import { useState } from "react";
+export const EachItem = ({
+  price,
+  count,
+  ids,
+  title,
+  setpass,
+  pass,
+  data,
+  setdata,
+  image,
+}) => {
+  const [count1, setcount1] = useState(0);
+  useEffect(() => {
+    setcount1(count);
+  }, [count]);
+  useEffect(() => {
+    setdata(count1 * price);
+  }, [count1]);
+
   const decrement = () => {
-    db.collection("hi")
-      .doc(title)
-      .update({
-        count: count - 1,
+    setcount1(count1 - 1);
+    if (count1 === 1) {
+      const b = pass.filter(({ id }) => {
+        return id !== ids;
       });
+      setpass(b);
+    }
   };
   const increment = () => {
-    db.collection("hi")
-      .doc(title)
-      .update({
-        count: count + 1,
-      });
+    setcount1(count1 + 1);
+    // setcount1(count+1)
   };
   const del = () => {
-    db.collection("hi").doc(title).delete();
+    const b = pass.filter(({ id }) => {
+      return id !== ids;
+    });
+    setpass(b);
   };
   return (
     <div className="cartcont">
       <div className="flex cartitem">
-        <img src={a[0].image} alt="#"></img>
+        <img src={image} alt="#"></img>
         <div className="gg">
           <p>{title}</p>
           <div className="flex style">
             <button className="minus" onClick={decrement}>
               <div className="minusicon"></div>
             </button>
-            <div  className="margin-top">{count}</div>
+            <div className="margin-top">{count1}</div>
             <button className="plus" onClick={increment}>
               <div className="plusicon"></div>
             </button>
@@ -44,7 +57,7 @@ export const EachItem = ({ price, count, title }) => {
         </div>
         <div className="delprice">
           <div className="x" onClick={del}></div>
-          <div>${(count * price).toFixed(2)}</div>
+          <div>${(count1 * price).toFixed(2)}</div>
         </div>
       </div>
     </div>

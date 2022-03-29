@@ -1,10 +1,35 @@
 import React from "react";
 import "./App.css";
-import { useState, useRef, useEffect } from "react";
-import { db } from "./firebase";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-export const Itemdata = ({ image, price, description, rate, title }) => {
+export const Itemdata = ({
+  image,
+  price,
+  id,
+  description,
+  rate,
+  title,
+  setpass,
+  love,
+  setlove,
+  pass,
+  idk,
+  setidk,
+}) => {
+  const [bool, setbool] = useState(true);
   const [count, setcount] = useState(1);
+  const changebool = () => {
+    console.log("hi");
+    setbool(!bool);
+    console.log(bool);
+    if (!bool) {
+      setlove([
+        ...love,
+        { price: price, title: title, id: id, image: image, rate: { rate } },
+      ]);
+    }
+    setidk(id);
+  };
 
   const decrement = () => {
     if (count > 0) {
@@ -14,22 +39,14 @@ export const Itemdata = ({ image, price, description, rate, title }) => {
   const increment = () => {
     setcount(count + 1);
   };
-
-  const bool = () => {
-    // Storage.setItem(title, title)
-    db.collection("hi").doc(title).update({
-      bool: !true,
-    });
-  };
   const Addtobasket = () => {
-    db.collection('hi').doc(title).set({
-      price,
-      count: count,
-      title,
-      bool: true,
-    })
-    alert('Таны сагсанд нэмэгдлээ!')
+    setpass([
+      ...pass,
+      { count: count, price: price, title: title, id: id, image: image },
+    ]);
+    alert("Таны сагсанд нэмэгдлээ!");
   };
+  // console.log(pass);
   return (
     <div>
       <div style={{ width: "100%", height: "820px", overflow: "scroll" }}>
@@ -39,16 +56,15 @@ export const Itemdata = ({ image, price, description, rate, title }) => {
               {" "}
               <div className="leftarrow"></div>
             </Link>
-            {/* <div className="font">Women's clothing</div> */}
             <div className="idk"></div>
           </div>
         </div>
         <div className="imgcontainer">
           <img className="image" src={image} alt="#"></img>
         </div>
-        <div  className="flex space-around font iteminfo">
-          <div style={{width: '95%'}}> {title}</div>
-          <div onClick={bool} className="heartlogo"></div>
+        <div className="flex space-around font iteminfo">
+          <div style={{ width: "90%" }}> {title}</div>
+          <div onClick={changebool} className="heartlogo"></div>
         </div>
         <div className="flex space-around itemdecinc center2">
           <div className="flex center1 a">
@@ -57,8 +73,7 @@ export const Itemdata = ({ image, price, description, rate, title }) => {
             <button onClick={increment} className="plusn"></button>
           </div>
           <div className="font" style={{ lineHeight: "98px" }}>
-            ${" "}
-           { (count*price).toFixed(2)}
+            $ {(count * price).toFixed(2)}
           </div>
         </div>
         <div className="center2">
@@ -71,10 +86,8 @@ export const Itemdata = ({ image, price, description, rate, title }) => {
         </div>
         <div>
           <div className="center2 b avfont">Rating: {rate}</div>
-          {/* <div>{rate}</div> */}
         </div>
       </div>
-
       <div className="flex center">
         <button className="addbasket" onClick={Addtobasket}>
           Add to Basket
