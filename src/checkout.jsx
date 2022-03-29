@@ -6,6 +6,7 @@ export const Checkout = ({ setbool, bool, price }) => {
   const [acceptbool, setacceptbool] = useState(true);
   const del = () => {
     setbool(!bool);
+    // console.log(bool);
   };
   const accept = () => {
     setacceptbool(!acceptbool);

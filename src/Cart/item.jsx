@@ -2,15 +2,17 @@ import React, { useEffect } from "react";
 import "../App.css";
 import { useState } from "react";
 export const EachItem = ({
+  index,
   price,
   count,
   ids,
   title,
   setpass,
   pass,
-  data,
   setdata,
   image,
+  setnewob,
+  setminus,
 }) => {
   const [count1, setcount1] = useState(0);
   useEffect(() => {
@@ -21,7 +23,9 @@ export const EachItem = ({
   }, [count1]);
 
   const decrement = () => {
+    setminus((pass[index].count = count1 - 1));
     setcount1(count1 - 1);
+
     if (count1 === 1) {
       const b = pass.filter(({ id }) => {
         return id !== ids;
@@ -30,8 +34,8 @@ export const EachItem = ({
     }
   };
   const increment = () => {
+    setnewob((pass[index].count = count1 + 1));
     setcount1(count1 + 1);
-    // setcount1(count+1)
   };
   const del = () => {
     const b = pass.filter(({ id }) => {

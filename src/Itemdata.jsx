@@ -17,32 +17,40 @@ export const Itemdata = ({
   setidk,
 }) => {
   const [bool, setbool] = useState(true);
-  const [count, setcount] = useState(1);
+  const [count2, setcount] = useState(1);
   const changebool = () => {
-    console.log("hi");
     setbool(!bool);
-    console.log(bool);
+  };
+  useEffect(() => {
+    console.log("fav : ", bool);
     if (!bool) {
+      console.log("nemegdlee   : ", bool);
       setlove([
         ...love,
         { price: price, title: title, id: id, image: image, rate: { rate } },
       ]);
+    } else {
+      console.log("hasagdlaa : ", bool);
+      const a = love.filter(({ id }) => {
+        return id !== idk;
+      });
+
+      setlove(a);
     }
-    setidk(id);
-  };
+  }, [bool]);
 
   const decrement = () => {
-    if (count > 0) {
-      setcount(count - 1);
+    if (count2 > 0) {
+      setcount(count2 - 1);
     }
   };
   const increment = () => {
-    setcount(count + 1);
+    setcount(count2 + 1);
   };
   const Addtobasket = () => {
     setpass([
       ...pass,
-      { count: count, price: price, title: title, id: id, image: image },
+      { count: count2, price: price, title: title, id: id, image: image },
     ]);
     alert("Таны сагсанд нэмэгдлээ!");
   };
@@ -69,11 +77,11 @@ export const Itemdata = ({
         <div className="flex space-around itemdecinc center2">
           <div className="flex center1 a">
             <button onClick={decrement} className="minusn"></button>
-            <div className="num font">{count}</div>
+            <div className="num font">{count2}</div>
             <button onClick={increment} className="plusn"></button>
           </div>
           <div className="font" style={{ lineHeight: "98px" }}>
-            $ {(count * price).toFixed(2)}
+            $ {(count2 * price).toFixed(2)}
           </div>
         </div>
         <div className="center2">

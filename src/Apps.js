@@ -15,6 +15,7 @@ export const Apps = () => {
   const [pass, setpass] = useState([]);
   const [love,setlove]=useState([])
   const [idk,setidk]=useState([])
+
   return (
     <BrowserRouter>
       <Routes>

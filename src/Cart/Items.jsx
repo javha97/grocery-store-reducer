@@ -3,41 +3,21 @@ import { useState } from "react";
 import { EachItem } from "./item";
 import { Nav } from "../Navigation";
 import { Checkout } from "../checkout";
+import { useRef } from "react";
 export const Itemsonsnap = ({ pass, setpass }) => {
   const [data, setdata] = useState([]);
   const [bool, setbool] = useState(true);
-  // const ip = useRef();
-  // console.log(data);
-  // console.log(pass);
-  // ip.current = pass.reduce((acc, val) => {
-  //   return acc + val;
-  // });
-
-  // if (data) {
-  //   pass.forEach((el) => {
-  //     Object.keys(el).forEach((els) => {
-  //       el["price"] = data;
-  //     });
-  //   });
-  // }
-
-  console.log(pass);
-  // console.log(a);
-  // if (data) {
-  //   pass.map((el) => {
-  //     //  (Object.values(el)[1] = data);
-  //     let a = Object.keys(el);
-  //     console.log(a.price);
-  //     // console.log(el);
-  //   });
-  //   // console.log(pass);
-  // }
-
-  // console.log(pass);
-  // console.log(data);
+  const [newob, setnewob] = useState([]);
+  const [minus, setminus] = useState([]);
+  const additionalprice = useRef();
   const Click = () => {
     setbool(!bool);
   };
+  useEffect(() => {
+    additionalprice.current = pass.reduce((acc, ival) => {
+      return acc.price * acc.count + ival.price * ival.count;
+    });
+  }, [pass, newob, minus]);
   return (
     <div className="App flex">
       <div className="cartcontainer">
@@ -48,7 +28,12 @@ export const Itemsonsnap = ({ pass, setpass }) => {
               pass.map(({ price, id, title, image, count }, i) => {
                 return (
                   <EachItem
+                    minus={minus}
+                    setminus={setminus}
+                    setnewob={setnewob}
+                    newob={newob}
                     key={i}
+                    index={i}
                     price={price}
                     ids={id}
                     data={data}
@@ -66,13 +51,32 @@ export const Itemsonsnap = ({ pass, setpass }) => {
             <button className="addbasket flex" onClick={Click}>
               Go to checkout
               <div className="checkoutbtn">
-                {/* {ip.current ? "$" + ip.current.toFixed(2) : ip.current} */}
+                {pass.length === 1
+                  ? '$'+ pass[0].count * pass[0].price
+                  : additionalprice.current
+                  ? "$" + additionalprice.current.toFixed(2)
+                  : additionalprice.current}
               </div>
             </button>
           </div>
         </div>
         <Nav />
-        {/* {!bool && <Checkout bool={bool} price={ip.current.toFixed(2)} setbool={setbool}/>} */}
+        {bool && pass.length !== 1 ? ( 
+          additionalprice.current && !bool&&
+          <Checkout
+            bool={bool}
+            price={additionalprice.current.toFixed(2)}
+            setbool={setbool}
+          />
+        ) 
+        
+        : !bool &&  (
+          <Checkout
+            bool={bool}
+            price={pass[0].count * pass[0].price.toFixed(2)}
+            setbool={setbool}
+          />
+        )}
       </div>
     </div>
   );
