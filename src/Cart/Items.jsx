@@ -5,10 +5,7 @@ import { Nav } from "../Navigation";
 import { Checkout } from "../checkout";
 export const Itemsonsnap = ({ pass, setpass }) => {
   const [bool, setbool] = useState(true);
-  const [newob, setnewob] = useState([]);
-  const [minus, setminus] = useState([]);
   const [addprice, setaddprice] = useState(0);
-  // console.log(minus);
   const Click = () => {
     if (pass.length !== 0) {
       setbool(!bool);
@@ -20,8 +17,7 @@ export const Itemsonsnap = ({ pass, setpass }) => {
       b += pass[i].count * pass[i].price;
     }
     setaddprice(b);
-  }, [pass, newob, minus]);
-  // console.log(pass);
+  }, [pass]);
   return (
     <div className="App flex">
       <div className="cartcontainer">
@@ -32,10 +28,6 @@ export const Itemsonsnap = ({ pass, setpass }) => {
               pass.map(({ price, id, title, image, count }, i) => {
                 return (
                   <EachItem
-                    minus={minus}
-                    setminus={setminus}
-                    setnewob={setnewob}
-                    newob={newob}
                     key={i}
                     index={i}
                     price={price}

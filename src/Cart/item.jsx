@@ -9,13 +9,22 @@ export const EachItem = ({
   setpass,
   pass,
   image,
-  setnewob,
-  setminus,
 }) => {
-  // console.log(count);
-  // console.log(pass);
   const decrement = () => {
-    setminus((pass[index].count = count - 1));
+    const b = pass.filter(({ id }) => {
+      return id !== ids;
+    });
+    setpass([
+      ...b,
+      {
+        count: pass[index].count - 1,
+        price: price,
+        title: title,
+        id: ids,
+        image: image,
+      },
+    ]);
+
     if (count === 1) {
       const b = pass.filter(({ id }) => {
         return id !== ids;
@@ -23,8 +32,22 @@ export const EachItem = ({
       setpass(b);
     }
   };
+
   const increment = () => {
-    setnewob((pass[index].count = count + 1));
+    const b = pass.filter(({ id }) => {
+      return id !== ids;
+    });
+    setpass([
+      ...b,
+      {
+        count: pass[index].count + 1,
+        price: price,
+        title: title,
+        id: ids,
+        image: image,
+      },
+    ]);
+    // console.log(pass);
   };
   const del = () => {
     const b = pass.filter(({ id }) => {

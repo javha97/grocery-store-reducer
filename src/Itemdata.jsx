@@ -42,15 +42,30 @@ export const Itemdata = ({
     setcount(count2 + 1);
   };
   const Addtobasket = () => {
-    // console.log(pass);
     if (pass.length !== 0) {
       let a = pass.filter((el) => {
         return el.id === id;
       });
-      if (a) {
-        a.count = count2;
-        console.log(a);
+      if (a.length !== 0) {
+        const b = pass.filter((el) => {
+          return el.id !== id;
+        });
+        setpass([
+          ...b,
+          {
+            count: count2 + a[0].count,
+            price: price,
+            title: title,
+            id: id,
+            image: image,
+          },
+        ]);
         alert("item already added to your cart");
+      } else {
+        setpass([
+          ...pass,
+          { count: count2, price: price, title: title, id: id, image: image },
+        ]);
       }
     } else {
       setpass([
@@ -58,8 +73,7 @@ export const Itemdata = ({
         { count: count2, price: price, title: title, id: id, image: image },
       ]);
     }
-
-    // alert("Таны сагсанд нэмэгдлээ!");
+    alert("Таны сагсанд нэмэгдлээ!");
   };
   return (
     <div>
