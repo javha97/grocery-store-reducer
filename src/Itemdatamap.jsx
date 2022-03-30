@@ -2,12 +2,19 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { Itemdata } from "./Itemdata";
 import { data } from "./utils/data";
-import { useState } from "react";
 import "./App.css";
-export const Itemdatamap = ({ pass,count2,setcount, setpass, love,idk, setidk,setlove }) => {
+export const Itemdatamap = ({
+  pass,
+  count2,
+  setcount,
+  setpass,
+  love,
+  idk,
+  setidk,
+  setlove,
+}) => {
   const { slug } = useParams();
   // console.log(pass);
-
   return (
     <div className="App flex">
       <div className="maincontainer">
@@ -19,12 +26,10 @@ export const Itemdatamap = ({ pass,count2,setcount, setpass, love,idk, setidk,se
             ({ title, image, price, id, description, rating: { rate } }, i) => {
               return (
                 <Itemdata
-                count2={count2}
-                setcount={setcount}
-                setidk={setidk}
-                idk={idk}
-                love={love}
-                setlove={setlove}
+                  count2={count2}
+                  setcount={setcount}
+                  love={love}
+                  setlove={setlove}
                   id={id}
                   pass={pass}
                   setpass={setpass}

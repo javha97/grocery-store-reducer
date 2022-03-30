@@ -3,21 +3,25 @@ import { useState } from "react";
 import { EachItem } from "./item";
 import { Nav } from "../Navigation";
 import { Checkout } from "../checkout";
-import { useRef } from "react";
 export const Itemsonsnap = ({ pass, setpass }) => {
-  const [data, setdata] = useState([]);
   const [bool, setbool] = useState(true);
   const [newob, setnewob] = useState([]);
   const [minus, setminus] = useState([]);
-  const additionalprice = useRef();
+  const [addprice, setaddprice] = useState(0);
+  // console.log(minus);
   const Click = () => {
-    setbool(!bool);
+    if (pass.length !== 0) {
+      setbool(!bool);
+    }
   };
   useEffect(() => {
-    additionalprice.current = pass.reduce((acc, ival) => {
-      return acc.price * acc.count + ival.price * ival.count;
-    });
+    let b = 0;
+    for (let i = 0; i < pass.length; i++) {
+      b += pass[i].count * pass[i].price;
+    }
+    setaddprice(b);
   }, [pass, newob, minus]);
+  // console.log(pass);
   return (
     <div className="App flex">
       <div className="cartcontainer">
@@ -36,8 +40,6 @@ export const Itemsonsnap = ({ pass, setpass }) => {
                     index={i}
                     price={price}
                     ids={id}
-                    data={data}
-                    setdata={setdata}
                     image={image}
                     pass={pass}
                     setpass={setpass}
@@ -50,32 +52,13 @@ export const Itemsonsnap = ({ pass, setpass }) => {
           <div className="flex center absolute">
             <button className="addbasket flex" onClick={Click}>
               Go to checkout
-              <div className="checkoutbtn">
-                {pass.length === 1
-                  ? '$'+ pass[0].count * pass[0].price
-                  : additionalprice.current
-                  ? "$" + additionalprice.current.toFixed(2)
-                  : additionalprice.current}
-              </div>
+              <div className="checkoutbtn">${addprice.toFixed(2)}</div>
             </button>
           </div>
         </div>
         <Nav />
-        {bool && pass.length !== 1 ? ( 
-          additionalprice.current && !bool&&
-          <Checkout
-            bool={bool}
-            price={additionalprice.current.toFixed(2)}
-            setbool={setbool}
-          />
-        ) 
-        
-        : !bool &&  (
-          <Checkout
-            bool={bool}
-            price={pass[0].count * pass[0].price.toFixed(2)}
-            setbool={setbool}
-          />
+        {!bool && (
+          <Checkout bool={bool} price={addprice.toFixed(2)} setbool={setbool} />
         )}
       </div>
     </div>

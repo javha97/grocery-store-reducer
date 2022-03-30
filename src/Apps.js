@@ -14,7 +14,6 @@ import { useState } from "react";
 export const Apps = () => {
   const [pass, setpass] = useState([]);
   const [love,setlove]=useState([])
-  const [idk,setidk]=useState([])
 
   return (
     <BrowserRouter>
@@ -30,14 +29,14 @@ export const Apps = () => {
         <Route path="/explore/womencat" element={<Womencategory />}></Route>
         <Route
           path="/favorites/:slug"
-          element={<Itemdatamap love={love} setlove={setlove} idk={idk} setidk={setidk} pass={pass} setpass={setpass} />}
+          element={<Itemdatamap love={love} setlove={setlove} pass={pass} setpass={setpass} />}
         ></Route>
         <Route path="/cart/acceptorder" element={<Orderaccep />}></Route>
         <Route
           path="/cart"
           element={<Itemsonsnap  pass={pass} setpass={setpass} />}
         ></Route>
-        <Route path="/favorites" element={<Favorites love={love} idk={idk} setidk={setidk} setlove={setlove} />}></Route>
+        <Route path="/favorites" element={<Favorites love={love} setlove={setlove} />}></Route>
       </Routes>
     </BrowserRouter>
   );

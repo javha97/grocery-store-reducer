@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "../App.css";
-import { useState } from "react";
 export const EachItem = ({
   index,
   price,
@@ -9,24 +8,15 @@ export const EachItem = ({
   title,
   setpass,
   pass,
-  setdata,
   image,
   setnewob,
   setminus,
 }) => {
-  const [count1, setcount1] = useState(0);
-  useEffect(() => {
-    setcount1(count);
-  }, [count]);
-  useEffect(() => {
-    setdata(count1 * price);
-  }, [count1]);
-
+  // console.log(count);
+  // console.log(pass);
   const decrement = () => {
-    setminus((pass[index].count = count1 - 1));
-    setcount1(count1 - 1);
-
-    if (count1 === 1) {
+    setminus((pass[index].count = count - 1));
+    if (count === 1) {
       const b = pass.filter(({ id }) => {
         return id !== ids;
       });
@@ -34,8 +24,7 @@ export const EachItem = ({
     }
   };
   const increment = () => {
-    setnewob((pass[index].count = count1 + 1));
-    setcount1(count1 + 1);
+    setnewob((pass[index].count = count + 1));
   };
   const del = () => {
     const b = pass.filter(({ id }) => {
@@ -53,7 +42,7 @@ export const EachItem = ({
             <button className="minus" onClick={decrement}>
               <div className="minusicon"></div>
             </button>
-            <div className="margin-top">{count1}</div>
+            <div className="margin-top">{count}</div>
             <button className="plus" onClick={increment}>
               <div className="plusicon"></div>
             </button>
@@ -61,7 +50,7 @@ export const EachItem = ({
         </div>
         <div className="delprice">
           <div className="x" onClick={del}></div>
-          <div>${(count1 * price).toFixed(2)}</div>
+          <div>${(count * price).toFixed(2)}</div>
         </div>
       </div>
     </div>

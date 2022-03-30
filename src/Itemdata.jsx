@@ -13,8 +13,6 @@ export const Itemdata = ({
   love,
   setlove,
   pass,
-  idk,
-  setidk,
 }) => {
   const [bool, setbool] = useState(true);
   const [count2, setcount] = useState(1);
@@ -22,21 +20,17 @@ export const Itemdata = ({
     setbool(!bool);
   };
   useEffect(() => {
-    console.log("fav : ", bool);
     if (!bool) {
-      console.log("nemegdlee   : ", bool);
       setlove([
         ...love,
         { price: price, title: title, id: id, image: image, rate: { rate } },
       ]);
-    } else {
-      console.log("hasagdlaa : ", bool);
-      const a = love.filter(({ id }) => {
-        return id !== idk;
-      });
-
-      setlove(a);
     }
+    // console.log("hasagdlaa : ", bool);
+    // const a = love.filter(({ id }) => {
+    //   return id !== idk;
+    // });
+    // setlove(a);
   }, [bool]);
 
   const decrement = () => {
@@ -48,13 +42,25 @@ export const Itemdata = ({
     setcount(count2 + 1);
   };
   const Addtobasket = () => {
-    setpass([
-      ...pass,
-      { count: count2, price: price, title: title, id: id, image: image },
-    ]);
-    alert("Таны сагсанд нэмэгдлээ!");
+    // console.log(pass);
+    if (pass.length !== 0) {
+      let a = pass.filter((el) => {
+        return el.id === id;
+      });
+      if (a) {
+        a.count = count2;
+        console.log(a);
+        alert("item already added to your cart");
+      }
+    } else {
+      setpass([
+        ...pass,
+        { count: count2, price: price, title: title, id: id, image: image },
+      ]);
+    }
+
+    // alert("Таны сагсанд нэмэгдлээ!");
   };
-  // console.log(pass);
   return (
     <div>
       <div style={{ width: "100%", height: "820px", overflow: "scroll" }}>
