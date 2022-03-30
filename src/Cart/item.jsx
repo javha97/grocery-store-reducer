@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import "../App.css";
 export const EachItem = ({
   index,
@@ -11,43 +12,34 @@ export const EachItem = ({
   image,
 }) => {
   const decrement = () => {
-    const b = pass.filter(({ id }) => {
-      return id !== ids;
-    });
-    setpass([
-      ...b,
-      {
+    const umap = pass.map((cur) => {
+      if (cur.id !== ids) return cur;
+      return {
+        ...cur,
         count: pass[index].count - 1,
-        price: price,
-        title: title,
-        id: ids,
-        image: image,
-      },
-    ]);
+      };
+    });
+    setpass(umap);
 
     if (count === 1) {
-      const b = pass.filter(({ id }) => {
-        return id !== ids;
+      const b = pass.filter((cur) => {
+        return cur.id !== ids;
       });
       setpass(b);
     }
   };
 
   const increment = () => {
-    const b = pass.filter(({ id }) => {
-      return id !== ids;
-    });
-    setpass([
-      ...b,
-      {
+    const umap = pass.map((cur) => {
+      const { id } = cur;
+      if (id !== ids) return cur;
+
+      return {
+        ...cur,
         count: pass[index].count + 1,
-        price: price,
-        title: title,
-        id: ids,
-        image: image,
-      },
-    ]);
-    // console.log(pass);
+      };
+    });
+    setpass(umap);
   };
   const del = () => {
     const b = pass.filter(({ id }) => {
@@ -65,7 +57,7 @@ export const EachItem = ({
             <button className="minus" onClick={decrement}>
               <div className="minusicon"></div>
             </button>
-            <div className="margin-top">{count}</div>
+            <div className="margin-top">{pass[index].count}</div>
             <button className="plus" onClick={increment}>
               <div className="plusicon"></div>
             </button>
