@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect } from "react";
 import "../App.css";
 export const EachItem = ({
   index,
@@ -33,7 +32,6 @@ export const EachItem = ({
     const umap = pass.map((cur) => {
       const { id } = cur;
       if (id !== ids) return cur;
-
       return {
         ...cur,
         count: pass[index].count + 1,

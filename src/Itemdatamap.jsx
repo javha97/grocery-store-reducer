@@ -5,16 +5,16 @@ import { data } from "./utils/data";
 import "./App.css";
 export const Itemdatamap = ({
   pass,
-  count2,
   setcount,
   setpass,
   love,
-  idk,
-  setidk,
   setlove,
+  Increment,
+  Decrement,
+  arrofcart,
+  Addtobasket,
 }) => {
   const { slug } = useParams();
-  // console.log(pass);
   return (
     <div className="App flex">
       <div className="maincontainer">
@@ -26,8 +26,11 @@ export const Itemdatamap = ({
             ({ title, image, price, id, description, rating: { rate } }, i) => {
               return (
                 <Itemdata
-                  count2={count2}
+                  Addtobasket={Addtobasket}
+                  Decrement={Decrement}
+                  Increment={Increment}
                   setcount={setcount}
+                  arrofcart={arrofcart}
                   love={love}
                   setlove={setlove}
                   id={id}
