@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 export const Itemdata = ({
   image,
@@ -9,31 +9,16 @@ export const Itemdata = ({
   description,
   rate,
   title,
-  love,
-  setlove,
-  Increment,
-  arrofcart,
-  Decrement,
   Addtobasket,
+  el,
+  fav
 }) => {
-  const [bool, setbool] = useState(true);
-  // const changebool = () => {
-  //   setbool(!bool);
-  // };
-  // useEffect(() => {
-  //   if (!bool) {
-  //     setlove([
-  //       ...love,
-  //       { price: price, title: title, id: id, image: image, rate: { rate } },
-  //     ]);
-  //   }
-  //   // console.log("hasagdlaa : ", bool);
-  //   // const a = love.filter(({ id }) => {
-  //   //   return id !== idk;
-  //   // });
-  //   // setlove(a);
-  // }, [bool]);
-  // console.log(arrofcart);
+  const minus = () => {
+    if (num > 1) {
+      setnum(num - 1)
+    }
+  }
+  const [num, setnum] = useState(1)
   return (
     <div>
       <div style={{ width: "100%", height: "820px", overflow: "scroll" }}>
@@ -51,16 +36,16 @@ export const Itemdata = ({
         </div>
         <div className="flex space-around font iteminfo">
           <div style={{ width: "90%" }}> {title}</div>
-          {/* <div onClick={changebool} className="heartlogo"></div> */}
+          <div onClick={() => fav(id, image, price, rate, title)} className="heartlogo"></div>
         </div>
         <div className="flex space-around itemdecinc center2">
           <div className="flex center1 a">
-            <button onClick={Decrement} className="minusn"></button>
-            {/* <div className="num font">{arrofcart.count}</div> */}
-            <button onClick={()=> Increment()} className="plusn"></button>
+            <button onClick={minus} className="minusn"></button>
+            <div className="num font">{num}</div>
+            <button onClick={() => setnum(num + 1)} className="plusn"></button>
           </div>
           <div className="font" style={{ lineHeight: "98px" }}>
-            {/* $ {(arrofcart.count * price).toFixed(2)} */}
+            $ {(num * price).toFixed(2)}
           </div>
         </div>
         <div className="center2">
@@ -76,7 +61,7 @@ export const Itemdata = ({
         </div>
       </div>
       <div className="flex center">
-        <button className="addbasket" onClick={() => Addtobasket(id)}>
+        <button className="addbasket" onClick={() => Addtobasket(id, num, el, price)}>
           Add to Basket
         </button>
       </div>

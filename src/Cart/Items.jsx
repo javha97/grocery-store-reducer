@@ -1,50 +1,56 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 import { EachItem } from "./item";
 import { Nav } from "../Navigation";
 import { Checkout } from "../checkout";
-import { data } from "../utils/data";
-export const Itemsonsnap = ({ arrofcart }) => {
-  // console.log(arrofcart.cart);
+export const Itemsonsnap = ({ arrofcart, Increment, Decrement, Del }) => {
   const [bool, setbool] = useState(true);
-  const [addprice, setaddprice] = useState(0);
+  const click = () => {
+    for (let price of arrofcart.cart) {
+      if (price.price > 0) {
+        setbool(!bool)
+      }
+    }
+  }
+  let a = arrofcart.cart.reduce((ac, cur) => {
+    return ac + cur.num * cur.price
+  }, 0)
   return (
     <div className="App flex">
       <div className="cartcontainer">
         <div className="btnplace">
           <div>
             <div className="mycart">My cart</div>
-            
             {arrofcart.cart &&
-              data
-                .filter(({ id }) => {
-                  return id === (arrofcart.cart).filter({ id });
-                })
-                .map(({ price, id, title, image, count }, i) => {
+              arrofcart.cart.map(
+                ({ data: { price, title, image }, id, num }, i) => {
                   return (
                     <EachItem
+                      Del={Del}
+                      Decrement={Decrement}
+                      Increment={Increment}
                       key={i}
-                      index={i}
                       price={price}
-                      ids={id}
+                      id={id}
                       image={image}
                       title={title}
-                      count={count}
+                      num={num}
                     />
                   );
-                })}
+                }
+              )}
           </div>
           <div className="flex center absolute">
-            {/* <button className="addbasket flex" onClick={Click}>
+            <button className="addbasket flex" onClick={click}>
               Go to checkout
-              <div className="checkoutbtn">${addprice.toFixed(2)}</div>
-            </button> */}
+              <div className="checkoutbtn">${a.toFixed(2)}</div>
+            </button>
           </div>
         </div>
         <Nav />
-        {/* {!bool && (
-          <Checkout bool={bool} price={addprice.toFixed(2)} setbool={setbool} />
-        )} */}
+        {!bool && (
+          <Checkout bool={bool} price={a.toFixed(2)} setbool={setbool} />
+        )}
       </div>
     </div>
   );

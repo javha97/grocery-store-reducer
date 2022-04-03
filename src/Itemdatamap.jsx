@@ -4,15 +4,7 @@ import { Itemdata } from "./Itemdata";
 import { data } from "./utils/data";
 import "./App.css";
 export const Itemdatamap = ({
-  pass,
-  setcount,
-  setpass,
-  love,
-  setlove,
-  Increment,
-  Decrement,
-  arrofcart,
-  Addtobasket,
+  Addtobasket, fav
 }) => {
   const { slug } = useParams();
   return (
@@ -23,25 +15,19 @@ export const Itemdatamap = ({
             return id + "i" === slug;
           })
           .map(
-            ({ title, image, price, id, description, rating: { rate } }, i) => {
+            (el, i) => {
               return (
                 <Itemdata
+                  fav={fav}
                   Addtobasket={Addtobasket}
-                  Decrement={Decrement}
-                  Increment={Increment}
-                  setcount={setcount}
-                  arrofcart={arrofcart}
-                  love={love}
-                  setlove={setlove}
-                  id={id}
-                  pass={pass}
-                  setpass={setpass}
+                  id={el.id}
                   key={i}
-                  title={title}
-                  price={price}
-                  rate={rate}
-                  description={description}
-                  image={image}
+                  title={el.title}
+                  price={el.price}
+                  rate={el.rating.rate}
+                  description={el.description}
+                  image={el.image}
+                  el={el}
                 />
               );
             }
