@@ -7,11 +7,13 @@ import { Mencategory } from "./category/Mencategory";
 import { Electronicscategory } from "./category/electronicscategory";
 import { Womencategory } from "./category/Womencategory";
 import { Itemdatamap } from "./Itemdatamap";
+import { Itemdata } from "./Itemdata";
 import { Itemsonsnap } from "./Cart/Items.jsx";
 import { Favorites } from "./favorites/Favorites";
 import { Orderaccep } from "./Orderaccept";
 import { useReducer } from "react";
-
+import { createContext } from "react";
+export const mycontext = createContext()
 const initialarrofcart = { cart: [], favourite: [] };
 const reducer = (arrofcart, action) => {
   switch (action.type) {
@@ -125,6 +127,7 @@ export const Apps = () => {
   const fav = (id, image, price, rate, title) => {
     dispatch({ type: "Addfav", id, image, price, rate, title })
   }
+  const val = { Addtobasket, fav, Increment, Decrement, Del, arrofcart }
   return (
     <BrowserRouter>
       <Routes>
@@ -139,15 +142,25 @@ export const Apps = () => {
         <Route path="/explore/womencat" element={<Womencategory />}></Route>
         <Route
           path="/favorites/:slug"
-          element={<Itemdatamap Addtobasket={Addtobasket} fav={fav} />}  ></Route>
+          element={
+            <mycontext.Provider value={val}>
+              <Itemdatamap />
+            </mycontext.Provider>
+          }  ></Route>
         <Route path="/cart/acceptorder" element={<Orderaccep />}></Route>
         <Route
           path="/cart"
-          element={<Itemsonsnap arrofcart={arrofcart} Increment={Increment} Decrement={Decrement} Del={Del} />}
+          element={
+            <mycontext.Provider value={val}>
+              <Itemsonsnap />
+            </mycontext.Provider>}
         ></Route>
         <Route
           path="/favorites"
-          element={<Favorites arrofcart={arrofcart} />}
+          element={
+            <mycontext.Provider value={val}>
+              <Favorites />
+            </mycontext.Provider>}
         ></Route>
       </Routes>
     </BrowserRouter>

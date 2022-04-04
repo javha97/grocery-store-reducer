@@ -3,9 +3,7 @@ import { useParams } from "react-router-dom";
 import { Itemdata } from "./Itemdata";
 import { data } from "./utils/data";
 import "./App.css";
-export const Itemdatamap = ({
-  Addtobasket, fav
-}) => {
+export const Itemdatamap = () => {
   const { slug } = useParams();
   return (
     <div className="App flex">
@@ -18,8 +16,6 @@ export const Itemdatamap = ({
             (el, i) => {
               return (
                 <Itemdata
-                  fav={fav}
-                  Addtobasket={Addtobasket}
                   id={el.id}
                   key={i}
                   title={el.title}

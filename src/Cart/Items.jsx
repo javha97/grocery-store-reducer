@@ -1,18 +1,20 @@
 import React from "react";
-import { useState } from "react";
+import { useState , useContext} from "react";
 import { EachItem } from "./item";
 import { Nav } from "../Navigation";
 import { Checkout } from "../checkout";
-export const Itemsonsnap = ({ arrofcart, Increment, Decrement, Del }) => {
+import { mycontext } from "../Apps";
+export const Itemsonsnap = () => {
   const [bool, setbool] = useState(true);
+  const myval=useContext(mycontext)
   const click = () => {
-    for (let price of arrofcart.cart) {
+    for (let price of myval.arrofcart.cart) {
       if (price.price > 0) {
         setbool(!bool)
       }
     }
   }
-  let a = arrofcart.cart.reduce((ac, cur) => {
+  let a = myval.arrofcart.cart.reduce((ac, cur) => {
     return ac + cur.num * cur.price
   }, 0)
   return (
@@ -21,14 +23,11 @@ export const Itemsonsnap = ({ arrofcart, Increment, Decrement, Del }) => {
         <div className="btnplace">
           <div>
             <div className="mycart">My cart</div>
-            {arrofcart.cart &&
-              arrofcart.cart.map(
+            {myval.arrofcart.cart &&
+              myval.arrofcart.cart.map(
                 ({ data: { price, title, image }, id, num }, i) => {
                   return (
                     <EachItem
-                      Del={Del}
-                      Decrement={Decrement}
-                      Increment={Increment}
                       key={i}
                       price={price}
                       id={id}

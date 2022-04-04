@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
 export const Favorite = ({ image, id, title, rate, price }) => {
-  console.log(image, id, title, rate, price);
   return (
     <div className="cartcont">
       <div className="cartitem flex">
