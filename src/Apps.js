@@ -7,7 +7,6 @@ import { Mencategory } from "./category/Mencategory";
 import { Electronicscategory } from "./category/electronicscategory";
 import { Womencategory } from "./category/Womencategory";
 import { Itemdatamap } from "./Itemdatamap";
-import { Itemdata } from "./Itemdata";
 import { Itemsonsnap } from "./Cart/Items.jsx";
 import { Favorites } from "./favorites/Favorites";
 import { Orderaccep } from "./Orderaccept";
